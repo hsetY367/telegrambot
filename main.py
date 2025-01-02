@@ -1,7 +1,8 @@
-import  os
-from dotenv import load_dotenv
+import os
 from typing import Final
-from telegram import  Update
+
+from dotenv import load_dotenv
+from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 
 load_dotenv()
@@ -37,6 +38,7 @@ def handle_responses(text: str) -> str:
     return 'Sorry, I don\'t understand.'
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    global response
     message_type = update.message.chat.type
     text = update.message.text
 
