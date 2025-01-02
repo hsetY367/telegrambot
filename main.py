@@ -1,5 +1,5 @@
 import  os
-from dotenv import load_dotenv, dotenv_values
+from dotenv import load_dotenv
 from typing import Final
 from telegram import  Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
@@ -42,13 +42,13 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
     print(f'User({update.message.from_user.id}) Type: {message_type} Text: {text}')
 
-    if message_type == 'group':
+    if message_type == 'supergroup':
         # Check if the bot's username is mentioned
         if BOT_USERNAME in text:
             # Extract the remaining text after removing the username
             new_text = text.replace(BOT_USERNAME, '').strip()
             response = handle_responses(new_text)
-        else:
+        elif message_type=='private':
             # Ignore messages that don't mention the bot
             return
     else:
